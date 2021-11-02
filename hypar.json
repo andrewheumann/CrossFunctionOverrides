@@ -1,0 +1,55 @@
+{
+  "$schema": "https://hypar.io/Schemas/Function.json",
+  "id": "90496f10-9c8f-4320-88bf-b21d59ad1b53",
+  "name": "Cross Function Overrides",
+  "description": "The CrossFunctionOverrides function.",
+  "language": "C#",
+  "model_dependencies": [
+    {
+      "name": "Space Planning Zones"
+    }
+  ],
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "Length": {
+        "type": "number",
+        "description": "The Length.",
+        "minimum": 1.0,
+        "maximum": 10.0,
+        "multipleOf": 1.0,
+        "$hyparUnitType": "length"
+      },
+      "Width": {
+        "type": "number",
+        "description": "The Width.",
+        "minimum": 1.0,
+        "maximum": 10.0,
+        "multipleOf": 1.0,
+        "$hyparUnitType": "length"
+      }
+    }
+  },
+  "overrides": {
+    "Door Location": {
+      "context": "[*discriminator=Elements.SpaceBoundary&Name=Meeting Room]",
+      "dependency": "Space Planning Zones",
+      "identity": {
+        "ParentCentroid": {
+          "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
+        }
+      },
+      "schema": {
+        "Door Location": {
+          "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
+        }
+      }
+    }
+  },
+  "element_types": [
+    "https://prod-api.hypar.io/schemas/SpaceBoundary"
+  ],
+  "repository_url": "https://github.com/hypar-io/function",
+  "last_updated": "0001-01-01T00:00:00",
+  "cli_version": "0.9.7-alpha.0"
+}
